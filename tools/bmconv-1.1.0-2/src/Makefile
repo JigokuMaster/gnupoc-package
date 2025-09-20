@@ -26,7 +26,7 @@ BIN=bmconv
 all: $(BIN)
 
 $(BIN): $(OBJS) Makefile
-	$(CC) $(LFLAGS) $(OBJS) -o $@ $(LIBS)
+	$(CC) $(LDFLAGS) $(OBJS) -o $@ $(LIBS)
 
 %.o:	%.cpp $(DEPS)
 	$(CC) $(CFLAGS) -c $< -o $@

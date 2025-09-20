@@ -7,8 +7,8 @@ CFLAGS+=-Wall
 CFLAGS+=-I../include
 #CFLAGS+=-D_UNICODE -DUNICODE
 CFLAGS+=-DTEST -ggdb
-LDFLAGS=
-LIBS=-lz -lcrypto
+#LDFLAGS=
+LIBS=-lz -lcrypto -ldl
 OBJS=\
 	crtsis.o \
 	makesis.o \

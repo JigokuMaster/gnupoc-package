@@ -6,7 +6,7 @@ GCC_VERSION=-2.95
 GCC_VERSION=
 CFLAGS+=-Wall -Wno-deprecated
 CFLAGS+=-I../inc -Iderived
-LFLAGS=
+#LFLAGS=
 DEPS=\
 	../inc/array.h \
 	../inc/astring.h \
@@ -68,7 +68,7 @@ BIN=rcomp
 all: $(BIN)
 
 $(BIN): $(OBJS) Makefile
-	g++$(GCC_VERSION) $(LFLAGS) $(OBJS) -o $@ $(LIBS)
+	g++$(GCC_VERSION) $(LDFLAGS) $(OBJS) -o $@ $(LIBS)
 
 %.o: %.cpp $(DEPS)
 	g++$(GCC_VERSION) $(CFLAGS) -c $< -o $@

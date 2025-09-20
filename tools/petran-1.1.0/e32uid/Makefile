@@ -19,7 +19,7 @@ BIN=uidcrc
 all: $(BIN)
 
 $(BIN): $(OBJS) Makefile
-	g++$(GCC_VERSION) $(LFLAGS) $(OBJS) -o $@ $(LIBS)
+	g++$(GCC_VERSION) $(LDFLAGS) $(OBJS) -o $@ $(LIBS)
 
 %.o: %.cpp $(DEPS)
 	g++$(GCC_VERSION) $(CFLAGS) -c $< -o $@

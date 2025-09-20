@@ -1,8 +1,8 @@
 #!/bin/sh
 
-if [ $# != 1 -o $0 != "./install_eka2_tools" ]; then
-  echo "Usage: ./install_eka2_tools <target-dir>"
-  echo " e.g.: ./install_eka2_tools ~/csl-gcc"
+if [ $# != 1 -o $0 != "./install_eka2_statictools" ]; then
+  echo "Usage: ./install_eka2_statictools <target-dir>"
+  echo " e.g.: ./install_eka2_statictools ~/csl-gcc"
   exit 1
 fi
 
@@ -11,12 +11,14 @@ DEST=`echo $1 | sed s:/\$::`
 mkdir -p $DEST/bin || exit 1
 DEST=`cd $DEST && pwd`
 
-MAKE=make
+MAKE="make -B"
+export LDFLAGS="-static"
+export MAKE
+
 if [ "`which gmake`" != "" ]; then
-	MAKE=gmake
+	MAKE="gmake -B"
 fi
 
-export MAKE
 TRUE=`which true`
 
 while read a
@@ -29,14 +31,16 @@ do
   fi
 done << __END
 
+
 cd petran-1.1.0 && $MAKE && cp e32uid/uidcrc $DEST/bin
 cd bmconv-1.1.0-2 && $MAKE && cp src/bmconv $DEST/bin
 cd rcomp-7.0.1 && $MAKE && cp src/rcomp $DEST/bin
-cd makesis-4 && bash build.sh && cp src/makesis src/signsis src/makekeys $DEST/bin
+cd makesis-4 && bash build_static.sh && cp src/makesis src/signsis src/makekeys $DEST/bin
 cd make-3.81 && ./configure && $MAKE CFLAGS="-D__alloca=alloca" -C glob && $MAKE make && cp make $DEST/bin/extmake
 cd elf2e32 && $MAKE -f Makefile.local-libelf libelf.a all && cp elf2e32 elftran gendirective genstubs getexports $DEST/bin
-g++ mifconv.cpp -o $DEST/bin/mifconv
+g++ -static mifconv.cpp -o $DEST/bin/mifconv
 ln -sf $TRUE $DEST/bin/rem
+cp rem $DEST/bin
 cp del $DEST/bin
 cp copy $DEST/bin
 

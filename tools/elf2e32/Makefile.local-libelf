@@ -1,5 +1,5 @@
 CXXFLAGS = -Ilibelf/include -DNO_ELF_RAWCHUNK
-LDFLAGS = -Llibelf/lib
+LDFLAGS += -Llibelf/lib
 
 include Makefile
 

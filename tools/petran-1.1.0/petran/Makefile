@@ -5,7 +5,7 @@
 # GCC_VERSION=-2.95
 CFLAGS+=-Wall -Wno-deprecated
 CFLAGS+=-I../inc -I../deflate
-LFLAGS=
+#LFLAGS=
 DEPS=\
 	../inc/pe_defs.h \
 	../inc/e32def.h \
@@ -43,7 +43,7 @@ BIN=petran
 all: $(BIN)
 
 $(BIN): $(OBJS) Makefile
-	g++$(GCC_VERSION) $(LFLAGS) $(OBJS) -o $@ $(LIBS)
+	g++$(GCC_VERSION) $(LDFLAGS) $(OBJS) -o $@ $(LIBS)
 
 %.o: %.cpp $(DEPS)
 	g++$(GCC_VERSION) $(CFLAGS) -c $< -o $@
