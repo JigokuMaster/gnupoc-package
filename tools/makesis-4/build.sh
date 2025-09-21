@@ -8,9 +8,9 @@ wget -nc -i openssl.txt
 
 echo "building openssl ..."
 
-OPENSSL_PATH=`realpath ./openssl-1.0.2n`
-
 tar xvf openssl-1.0.2n.tar.gz
+
+OPENSSL_PATH=`realpath ./openssl-1.0.2n`
 
 (cd $OPENSSL_PATH && ./config && $MAKE)
 
