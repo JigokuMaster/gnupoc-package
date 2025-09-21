@@ -11,12 +11,12 @@ DEST=`echo $1 | sed s:/\$::`
 mkdir -p $DEST/bin || exit 1
 DEST=`cd $DEST && pwd`
 
-MAKE="make -B"
+MAKE="make"
 export LDFLAGS="-static"
 export MAKE
 
 if [ "`which gmake`" != "" ]; then
-	MAKE="gmake -B"
+	MAKE="gmake"
 fi
 
 TRUE=`which true`
