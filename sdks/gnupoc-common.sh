@@ -2,9 +2,10 @@
 
 EKA1TOOLS=~/symbian-gcc/bin
 EKA2TOOLS=~/csl-gcc/bin
+PERL5_PATH=~/perl5/perlbrew/perls/perl-5.10.1
 
 if [ -f ${EPOCROOT}/epoc32/tools/elf2e32.exe ]; then
-	export PATH=${EKA2TOOLS}:${EPOCROOT}/epoc32/tools:${PATH}
+	export PATH=${EKA2TOOLS}:${PERL5_PATH}/bin:${EPOCROOT}/epoc32/tools:${PATH}
 else
 	export PATH=${EKA1TOOLS}:${EPOCROOT}/epoc32/tools:${PATH}
 fi
