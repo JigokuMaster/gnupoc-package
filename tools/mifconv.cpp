@@ -96,7 +96,12 @@ bool findCaseInsensitive(char* path, char* fullpath = NULL) {
 }
 
 void writeUint32(uint32_t value, FILE* out) {
-	uint8_t buf[] = { value >> 0, value >> 8, value >> 16, value >> 24 };
+	uint8_t buf[] = { 
+	    static_cast<uint8_t>(value >> 0),
+	    static_cast<uint8_t>(value >> 8),
+	    static_cast<uint8_t>(value >> 16),
+	    static_cast<uint8_t>(value >> 24) 
+	};
 	fwrite(buf, 1, 4, out);
 }
 

@@ -1,3 +1,5 @@
+CC ?= gcc
+CXX ?= g++
 CXXFLAGS += -Wall -pedantic -ggdb -Wno-long-long -Ideflate/deflate -Ideflate/inc
 LDFLAGS += -lelf -lz
 

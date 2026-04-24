@@ -427,7 +427,7 @@ int BitmapCompiler::LoadPalette(char* aPaletteFilename)
 		int ret = ReadHexString(hexBuf,dataPtr,dataPtrLimit);
 		if (ret)
 			{
-			delete paletteData;
+			delete[] paletteData;
 			return ret;
 			}
 
@@ -438,7 +438,7 @@ int BitmapCompiler::LoadPalette(char* aPaletteFilename)
 		iPalette[index] = TRgb(red,green,blue);
 		}
 
-	delete paletteData;
+	delete[] paletteData;
 	CalculateInversePalette();
 	return NoError;
 	}
@@ -522,7 +522,9 @@ char* BitmapCompiler::UnadornedName(char* aName)
 	char* foundExt = strrchr(aName,'.');
 
 	char* foundPath = (foundDir > foundUrl) ? foundDir : foundUrl;
-	char* firstchar = (foundPath > 0) ? foundPath + 1 : aName;
+	//char* firstchar = (foundPath > 0) ? foundPath + 1 : aName;
+	char* firstchar = (foundPath && *foundPath) ? foundPath + 1 : aName;
+
 	char* lastchar = (foundExt > firstchar) ? foundExt : aName+len;
 
 	static char result[256];

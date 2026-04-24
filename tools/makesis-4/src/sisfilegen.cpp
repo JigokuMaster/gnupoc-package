@@ -52,8 +52,23 @@ extern "C" {
 using std::stack;
 
 uint32_t uidCrc(uint32_t uid1, uint32_t uid2, uint32_t uid3) {
-	uint8_t buf1[] = { (uid1 >> 8), (uid1 >> 24), (uid2 >> 8), (uid2 >> 24), (uid3 >> 8), (uid3 >> 24) };
-	uint8_t buf2[] = { (uid1 >> 0), (uid1 >> 16), (uid2 >> 0), (uid2 >> 16), (uid3 >> 0), (uid3 >> 16) };
+	uint8_t buf1[] = { 
+	    static_cast<uint8_t>(uid1 >> 8),
+	    static_cast<uint8_t>(uid1 >> 24),
+	    static_cast<uint8_t>(uid2 >> 8),
+	    static_cast<uint8_t>(uid2 >> 24),
+	    static_cast<uint8_t>(uid3 >> 8),
+	    static_cast<uint8_t>(uid3 >> 24)
+	};
+
+	uint8_t buf2[] = {
+	    static_cast<uint8_t>(uid1 >> 0), 
+	    static_cast<uint8_t>(uid1 >> 16),
+	    static_cast<uint8_t>(uid2 >> 0), 
+	    static_cast<uint8_t>(uid2 >> 16), 
+	    static_cast<uint8_t>(uid3 >> 0), 
+	    static_cast<uint8_t>(uid3 >> 16)
+	};
 	uint16_t crc1 = crcFast(buf1, 6);
 	uint16_t crc2 = crcFast(buf2, 6);
 	return (crc1<<16) | crc2;

@@ -230,6 +230,9 @@ extern char *alloca ();
 
 #endif
 
+
+# define __stat stat
+
 #ifndef __GNU_LIBRARY__
 # define __stat stat
 # ifdef STAT_MACROS_BROKEN

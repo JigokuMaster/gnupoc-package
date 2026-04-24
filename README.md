@@ -2,9 +2,10 @@ This repo aims to show how to build and use gnupoc-package on modern Linux (debi
 
 # Requirements
 
-1. GCC is required (GCC 10 was tested) clang or other compilers probably won't work.
+1. GCC is required (GCC 10/12 were tested)
 
-2. 32-bit libraries, you need them to run the pre-built tools GCCE3 and (p7zip, unshield) used for extracting SDK packages, of course assuming your machine is 64bit.
+2. 32-bit libraries (if yuor machine is 64bits)
+those are required to run GCCE3 and p7zip/unshield used for extracting SDK packages.
 
 ```bash
 sudo dpkg --add-architecture i386
@@ -17,13 +18,14 @@ sudo apt install zlib1g:i386
 
 3. wget used for downloading openssl.
 
-4. dos2unix.
+4. dos2unix
 
 ```bash
 sudo apt install dos2unix
 ```
 
-5. an older version of perl5 is required by abd build-system (5.10.1 works fine) i tested an easy way to install it via perlbrew.
+5. an older version of perl5 is required by abld build-system (5.10.1 works fine).
+the easy way to install it is via perlbrew.
 
 ```bash
 sudo apt install perlbrew
@@ -32,7 +34,7 @@ sudo apt install perlbrew
 ```bash
 perlbrew init
 ```
-Please read the Instructions... you will be asked to add "source ~/perl5/perlbrew/etc/bashrc" to ~/.profile
+Please read the instructions... you will be asked to add "source ~/perl5/perlbrew/etc/bashrc" to ~/.profile
 after doing so, type bash, then do:
 
 ```bash
@@ -46,7 +48,7 @@ First clone the repo or download it manually to your home directory.
 ```bash
 git clone https://github.com/JigokuMaster/gnupoc-package.git
 ```
-Note: you can skip building the tools and use the static binaries including GCCE3 , see the release page. 
+Note: you can skip building the tools and use the static binaries including GCCE3, see the release page. 
 
 if you want to build then just like the original [guide](tools/README), download [gcce-3.4](https://www.martin.st/symbian/gnu-csl-arm-2005Q1C-arm-none-symbianelf-i686-pc-linux-gnu.tar.bz2) to your home directory
 
@@ -56,7 +58,7 @@ mkdir csl-gcc
 cd csl-gcc
 tar -jxvf ../gnu-csl-arm-2005Q1C-arm-none-symbianelf-i686-pc-linux-gnu.tar.bz2
 ```
-Now build & install:
+now build & install:
 
 ```bash
 cd ~/gnupoc-package/tools
@@ -128,7 +130,7 @@ patch libgcc
 cd ~/gnupoc-package/tools
 ./fix_csl_gcc_eh ~/csl-gcc4
 ```
-Next download [qt-symbian-opensource-4.7.1-s60.exe](https://ftp.icm.edu.pl/packages/qt.old/source/qt-symbian-opensource-4.7.1-s60.exe)
+next download [qt-symbian-opensource-4.7.1-s60.exe](https://ftp.icm.edu.pl/packages/qt.old/source/qt-symbian-opensource-4.7.1-s60.exe)
 
 alternative [link](https://drive.google.com/file/d/1uhEqKeSRqrzhXYYL7A7c6Kb6itnKAeIv/view?usp=sharing) 
 
@@ -143,13 +145,13 @@ Install the Qt SDK
 ./install_qt_4.7.1 qt-symbian-opensource-4.7.1-s60.exe -qt ~/symbian-sdks/qt_4.7.1 -sdk ~/symbian-sdks/s60_32
 ```
 
-Next edit your PATH , you don't need ~/gnupoc wrappers  abld, bldmake etc ...
+next edit your PATH, you don't need ~/gnupoc wrappers  abld, bldmake etc ...
 
 ```bash
 export PATH=~/csl-gcc4/bin:~/symbian-sdks/qt_4.7.1/bin:$PATH
 export QMAKESPEC=symbian/linux-gcce
 ```
-We need the buildtools at ~/csl-gcc/bin to be in ~/csl-gcc4/bin
+we need the build tools at ~/csl-gcc/bin to be in ~/csl-gcc4/bin
 
 
 ```bash
@@ -170,7 +172,7 @@ do
 done
 ```
 
-Now build some example
+finally build some example
 
 ```bash
 cd ~/symbian-sdks/qt_4.7.1/examples/widgets/lineedits

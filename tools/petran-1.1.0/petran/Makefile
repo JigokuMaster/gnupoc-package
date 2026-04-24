@@ -2,10 +2,10 @@
 # Makefile
 #
 
-# GCC_VERSION=-2.95
-CFLAGS+=-Wall -Wno-deprecated
-CFLAGS+=-I../inc -I../deflate
-#LFLAGS=
+CXX ?= g++ 
+CXXFLAGS+=-Wall -Wno-deprecated
+CXXFLAGS+=-I../inc -I../deflate
+
 DEPS=\
 	../inc/pe_defs.h \
 	../inc/e32def.h \
@@ -42,14 +42,11 @@ BIN=petran
 
 all: $(BIN)
 
-$(BIN): $(OBJS) Makefile
-	g++$(GCC_VERSION) $(LDFLAGS) $(OBJS) -o $@ $(LIBS)
+$(BIN): $(OBJS)
+	$(CXX) $(LDFLAGS) $(OBJS) -o $@ $(LIBS)
 
 %.o: %.cpp $(DEPS)
-	g++$(GCC_VERSION) $(CFLAGS) -c $< -o $@
-
-%.o: %.c
-	gcc$(GCC_VERSION) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 install: $(BIN)
 	install -m 755 $(BIN) $(DESTDIR)/usr/bin

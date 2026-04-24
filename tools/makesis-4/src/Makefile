@@ -3,10 +3,14 @@
 #
 
 #GCC_VERSION=-2.95
-CFLAGS+=-Wall
-CFLAGS+=-I../include
+CC ?= gcc
+CXX ?= g++
+CFLAGS+=-I../include -Wall
 #CFLAGS+=-D_UNICODE -DUNICODE
 CFLAGS+=-DTEST -ggdb
+CXXFLAGS+=-std=c++98 $(CFLAGS)
+
+
 #LDFLAGS=
 LIBS=-lz -lcrypto -ldl
 OBJS=\
@@ -31,26 +35,26 @@ all: $(BIN)
 devtools: finddatetime dumpcontroller dumptree
 
 makesis: $(OBJS) Makefile
-	g++$(GCC_VERSION) $(LDFLAGS) $(OBJS) -o $@ $(LIBS)
+	$(CXX) $(LDFLAGS) $(OBJS) -o $@ $(LIBS)
 
 signsis: signsis.o crc.o signutils.o sisfield.o
-	g++$(GCC_VERSION) $(LDFLAGS) $+ -o $@ $(LIBS)
+	$(CXX) $(LDFLAGS) $+ -o $@ $(LIBS)
 
 finddatetime: finddatetime.o sisfield.o
-	g++$(GCC_VERSION) -o $@ $+ $(LDFLAGS) $(LIBS)
+	$(CXX) -o $@ $+ $(LDFLAGS) $(LIBS)
 
 dumpcontroller: dumpcontroller.o sisfield.o
-	g++$(GCC_VERSION) -o $@ $+ $(LDFLAGS) $(LIBS)
+	$(CXX) -o $@ $+ $(LDFLAGS) $(LIBS)
 
 dumptree: dumptree.o sisfield.o
-	g++$(GCC_VERSION) -o $@ $+ $(LDFLAGS) $(LIBS)
+	$(CXX) -o $@ $+ $(LDFLAGS) $(LIBS)
 
 %.o: %.cpp crtsis.h makesis.h parsecmd.h parsepkg.h utf8.h utils.h \
 	../include/windows.h ../include/tchar.h
-	g++$(GCC_VERSION) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 %.o: %.c
-	gcc$(GCC_VERSION) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 install: $(BIN)
 	install -m 755 $(BIN) $(DESTDIR)/usr/bin
